@@ -35,3 +35,45 @@ PS F:\xpndev\elasticsearch56> .\logstash-5.6.11\logstash-5.6.11\bin\logstash.bat
 
 4. 参考文档
 - https://segmentfault.com/a/1190000011784259
+### 实践
+
+1. 创建一个索引
+```
+        IndexResponse response = client.prepareIndex("student", "tweet", "1").setSource(XContentFactory.jsonBuilder()
+                .startObject()//生成文档
+                .field("id", "1")
+                .field("name", "刘邦")
+                .field("age", "11")
+                .field("birth", new Date())
+                .field("update_time", new Date())
+                .endObject()).get();
+```
+2. 全量同步
+PS F:\xpndev\elasticsearch6.4\logstash-5.6.11\logstash-5.6.11\bin> .\logstash.bat -f F:\xpndev\elasticsearch6.4\mysql.conf
+
+### Head插件的安装与使用
+
+https://github.com/mobz/elasticsearch-head
+
+Running with built in server
+ - git clone git://github.com/mobz/elasticsearch-head.git
+ - cd elasticsearch-head
+ - npm install
+ - npm run start
+ - open http://localhost:9100/
+
+需要在elasticsearch的elasticsearch.yml文件里面添加
+```
+	# 允许CORS跨域
+	http.cors.enabled: true
+	http.cors.allow-origin: "*"
+```
+### mysql语句在线转换成ElasticSearch json查询语句
+	http://www.ischoolbar.com/EsParser/
+
+
+
+
+
+
+
